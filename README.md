@@ -1,4 +1,5 @@
-Code to download Chainsaw Man Vol 1-11 Colored as PDFs.
+Code to download CSM 1-11 Colored as PDF / EPub.
+*No one's telling you to use the code, consider this a grey area side project or something.
 
 1. Make your environment for the dependencies so you don't mess up your root stuff
 <br>
