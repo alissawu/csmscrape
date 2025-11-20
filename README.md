@@ -17,7 +17,8 @@ I personally use python3 and pip3. You may use pip or something. Just check or d
 This will download all the images, then merge them into a PDF per volume
 If you want epubs, run 
 ```python3 csm_epub.py```
-This includes a navigation dropdown capability
+This includes a navigation dropdown capability.
+Btw you have to run this AFTER running csm_all
 <br>
 
 3. Notes
