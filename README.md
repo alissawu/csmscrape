@@ -18,6 +18,7 @@ If you want epubs, run
 ```python3 csm_epub.py```
 This includes a navigation dropdown capability
 <br>
+
 3. Notes
 <br>
 The initial download was really slow so I sped it up with concurrency but the server has scrape limits so I just kept the max workers at 3 cuz otherwise it gets screwy
