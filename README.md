@@ -7,7 +7,7 @@ I personally use python3 and pip3. You may use pip or something. Just check or d
 ```python3 -m venv csm-env```
 ```source csm-env/bin/activate```
 ```pip3 install -r requirements.txt```
-
+<br>
 
 2. Run the code
 <br>
@@ -17,7 +17,7 @@ This will download all the images, then merge them into a PDF per volume
 If you want epubs, run 
 ```python3 csm_epub.py```
 This includes a navigation dropdown capability
-
+<br>
 3. Notes
 <br>
 The initial download was really slow so I sped it up with concurrency but the server has scrape limits so I just kept the max workers at 3 cuz otherwise it gets screwy
