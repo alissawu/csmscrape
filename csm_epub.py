@@ -54,16 +54,32 @@ def build_epub_for_volume(vol: str):
         chapters[chap_label].append((rel_path, full_path))
 
     book = epub.EpubBook()
-    book.set_identifier(f"chainsaw-man-colored-v{vol}")
-    book.set_title(f"Chainsaw Man (Digitally Colored) v{vol}")
+
+    # Nicer identifier / title (no "(Digitally Colored)")
+    vol_int = int(vol)
+    title = f"Chainsaw Man Vol {vol_int}"
+
+    book.set_identifier(f"chainsaw-man-vol-{vol}")
+    book.set_title(title)
     book.set_language("en")
 
     # Basic metadata
     book.add_author("Tatsuki Fujimoto")
     book.add_metadata(
-        "DC", "description",
-        f"Chainsaw Man, Digitally Colored, Volume {vol}"
+        "DC",
+        "description",
+        f"Chainsaw Man Volume {vol_int}",
     )
+
+    # ---- Set the cover using the FIRST PAGE of the volume ----
+    # image_entries is already ordered; take the first one
+    _, cover_full_path = image_entries[0]
+    cover_ext = os.path.splitext(cover_full_path)[1].lower() or ".jpg"
+    cover_name = f"cover_v{vol}{cover_ext}"
+    with open(cover_full_path, "rb") as f:
+        # This creates a dedicated cover image item, but we still
+        # create a normal first page in the spine below.
+        book.set_cover(cover_name, f.read())
 
     spine_items = []
     toc_links = []
@@ -132,18 +148,17 @@ def build_epub_for_volume(vol: str):
             )
 
     # Table of contents (dropdown in readers like Apple Books).
-    # This does NOT create a visible "TOC page" at the front.
     book.toc = toc_links
 
-    # Required navigation files (NCX + Nav), but we do NOT
-    # include 'nav' in the spine, so it's not shown as first page.
+    # Required navigation files (NCX + Nav)
     book.add_item(epub.EpubNcx())
     book.add_item(epub.EpubNav())
 
-    # Reading order: just the pages, in order
+    # Reading order: just the pages, in order (cover is handled separately)
     book.spine = spine_items
 
-    epub_name = f"Chainsaw_Man_Digitally_Colored_v{vol}.epub"
+    # File name also without "(Digitally Colored)"
+    epub_name = f"Chainsaw_Man_Vol_{vol}.epub"
     epub_path = os.path.join(EPUB_OUTPUT, epub_name)
 
     epub.write_epub(epub_path, book)
