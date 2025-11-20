@@ -1,1 +1,8 @@
 /chainsaw_man_colored/
+
+# virtualenv
+csm-env/
+
+# python caches
+__pycache__/
+*.py[cod]
